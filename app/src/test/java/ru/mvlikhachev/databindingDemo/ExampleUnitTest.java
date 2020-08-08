@@ -1,4 +1,4 @@
-package ru.mvlikhachev.databinding;
+package ru.mvlikhachev.databindingDemo;
 
 import org.junit.Test;
 
