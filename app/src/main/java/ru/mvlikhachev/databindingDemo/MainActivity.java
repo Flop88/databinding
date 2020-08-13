@@ -3,7 +3,10 @@ package ru.mvlikhachev.databindingDemo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import ru.mvlikhachev.databindingDemo.databinding.ActivityMainBinding;
 
@@ -12,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 //    private TextView authorTextView;
 
     private ActivityMainBinding activityMainBinding;
+    private MainActivityButtonsHandler mainActivityButtonsHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         activityMainBinding.setBook(getCurrentBook());
+
+        mainActivityButtonsHandler = new MainActivityButtonsHandler(this);
+        activityMainBinding.setButtonHandler(mainActivityButtonsHandler);
     }
 
     private Book getCurrentBook() {
@@ -36,5 +43,34 @@ public class MainActivity extends AppCompatActivity {
         book.setAuthor("Shakespeare");
 
         return  book;
+    }
+
+
+//    public void onOkClicked(View view) {
+//        Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
+//    }
+//
+//
+//    public void onCancelClicked(View view) {
+//        Toast.makeText(this, "cancel", Toast.LENGTH_SHORT).show();
+//    }
+
+    public class MainActivityButtonsHandler {
+
+        Context context;
+
+        public MainActivityButtonsHandler(Context context) {
+            this.context = context;
+        }
+
+        public void onOkClicked(View view) {
+            Toast.makeText(context, "ok", Toast.LENGTH_SHORT).show();
+        }
+
+
+        public void onCancelClicked(View view) {
+            Toast.makeText(context, "cancel", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
